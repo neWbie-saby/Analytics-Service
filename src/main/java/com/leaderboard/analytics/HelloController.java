@@ -1,12 +1,27 @@
 package com.leaderboard.analytics;
 
+
+import java.util.concurrent.CompletableFuture;
+
+// import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.leaderboard.analytics.service.AnalyticsService;
 
 
 @RestController
 public class HelloController {
     
+    private final AnalyticsService analyticsService;
+
+    // @Autowired
+    public HelloController(AnalyticsService analyticsService){
+        this.analyticsService = analyticsService;
+    }
+
     @GetMapping("/")
     public String hello() {
         return "Hello from Spring Boot Analytics Service";
@@ -17,5 +32,14 @@ public class HelloController {
         return "Service is running";
     }
     
+    @GetMapping("/info")
+    public String getServiceInfo() {
+        return analyticsService.getServiceInfo();
+    }
+    
+    @GetMapping("/analyze/{matchId}")
+    public CompletableFuture<String> analyze(@PathVariable int matchId) {
+        return analyticsService.processAnalysisAsync(matchId);
+    }    
     
 }
