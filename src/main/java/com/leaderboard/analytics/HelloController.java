@@ -42,4 +42,9 @@ public class HelloController {
         return analyticsService.processAnalysisAsync(matchId);
     }    
     
+    @GetMapping("/db-test")
+    public String testDatabase(){
+        return analyticsService.testDatabaseConnection();
+    }
+    
 }
