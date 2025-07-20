@@ -64,4 +64,18 @@ public class AnalyticsService {
             return "Database connection Failed: " + e.getMessage();
         }
     }
+
+    public CompletableFuture<String> processAnalysisAsyncViaGrpc(int matchId){
+        return CompletableFuture.supplyAsync(() -> {
+            try{
+                Thread.sleep(1500);
+                String threadInfo = Thread.currentThread().toString();
+                return String.format("gRPC-Triggered Analysis completed for match %d (Thread %s)", matchId, threadInfo);
+            }
+            catch (InterruptedException ex){
+                Thread.currentThread().interrupt();
+                return "gRPC-Triggered Analysis failed for match - " + matchId;
+            }
+        }, virtualThreadExecutor);
+    }
 }

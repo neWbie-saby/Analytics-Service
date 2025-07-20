@@ -47,4 +47,14 @@ public class HelloController {
         return analyticsService.testDatabaseConnection();
     }
     
+    @GetMapping("/grpc-info")
+    public String grpcInfo(){
+        return """
+                gRPC Server Information:
+                - Server PORT: 9090
+                - Service: analytics.AnalyticsService
+                - Method: TriggerMatchAnalysis
+                - Health Check: Available
+                """;
+    }
 }

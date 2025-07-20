@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.leaderboard.analytics.dto.MatchUserDto;
-import com.leaderboard.analytics.entity.MatchUser;
 import com.leaderboard.analytics.service.MatchService;
 
 import java.util.List;
